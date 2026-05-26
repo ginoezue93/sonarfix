@@ -1,0 +1,43 @@
+OWASP A08:2021 — Software and Data Integrity Failures: Insecure Deserialization (CWE-502)
+
+Deserializing untrusted data with Java's native ObjectInputStream can trigger
+arbitrary code execution via deserialization gadget chains.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- ObjectInputStream ois = new ObjectInputStream(inputStream); ois.readObject();
+- No class whitelist on the ObjectInputStream
+- Deserializing data received from the network or user input
+
+REQUIRED FIX — Class-filtering ObjectInputStream:
+
+    // BEFORE (vulnerable)
+    ObjectInputStream ois = new ObjectInputStream(inputStream);
+    Object obj = ois.readObject();
+
+    // AFTER (secure) — Java 9+ serialization filter
+    ObjectInputStream ois = new ObjectInputStream(inputStream);
+    ois.setObjectInputFilter(info -> {
+        Class<?> cl = info.serialClass();
+        if (cl == null) return ObjectInputFilter.Status.UNDECIDED;
+        if (cl == MyAllowedClass.class || cl == AnotherSafeClass.class) {
+            return ObjectInputFilter.Status.ALLOWED;
+        }
+        return ObjectInputFilter.Status.REJECTED;
+    });
+    Object obj = ois.readObject();
+
+SAFER ALTERNATIVE — Use JSON instead of Java serialization:
+
+    // Use Jackson or Gson for data transfer; avoid native Java serialization
+    // for any data originating from an untrusted source.
+    ObjectMapper mapper = new ObjectMapper();
+    MyClass obj = mapper.readValue(jsonString, MyClass.class);
+
+OWASP RULES
+-----------
+- Never deserialize data from untrusted sources without a class whitelist
+- Prefer JSON, XML, or Protocol Buffers over Java native serialization
+- If native deserialization is required, use ObjectInputFilter (Java 9+)
+- Log and alert on deserialization of unexpected class types
+- Isolate deserialization logic in a sandboxed component

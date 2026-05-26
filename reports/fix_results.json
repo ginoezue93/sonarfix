@@ -1,0 +1,226 @@
+[
+  {
+    "file": "sard_cases:test_cases/CWE113_009/src/CWE113_HTTP_Response_Splitting__database_addCookieServlet_01.java",
+    "line": 202,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_009/src/CWE113_HTTP_Response_Splitting__database_addCookieServlet_01.java",
+    "line": 129,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_009/src/CWE113_HTTP_Response_Splitting__database_addCookieServlet_01.java",
+    "line": 106,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_011/src/CWE113_HTTP_Response_Splitting__getQueryString_Servlet_addCookieServlet_01.java",
+    "line": 107,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_011/src/CWE113_HTTP_Response_Splitting__getQueryString_Servlet_addCookieServlet_01.java",
+    "line": 77,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_011/src/CWE113_HTTP_Response_Splitting__getQueryString_Servlet_addCookieServlet_01.java",
+    "line": 54,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_014/src/CWE113_HTTP_Response_Splitting__getCookies_Servlet_addCookieServlet_01.java",
+    "line": 98,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_014/src/CWE113_HTTP_Response_Splitting__getCookies_Servlet_addCookieServlet_01.java",
+    "line": 72,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE113_014/src/CWE113_HTTP_Response_Splitting__getCookies_Servlet_addCookieServlet_01.java",
+    "line": 49,
+    "rule": "java:S2092",
+    "severity": "MINOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE259_001/src/CWE259_Hard_Coded_Password__kerberosKey_01.java",
+    "line": 45,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_001/src/CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_kerberosKey_01.java",
+    "line": 243,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_001/src/CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_kerberosKey_01.java",
+    "line": 239,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_001/src/CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_kerberosKey_01.java",
+    "line": 150,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_001/src/CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_kerberosKey_01.java",
+    "line": 144,
+    "rule": "java:S2068",
+    "severity": "MAJOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_002/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_driverManager_01.java",
+    "line": 307,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_002/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_driverManager_01.java",
+    "line": 303,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_002/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_driverManager_01.java",
+    "line": 184,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_002/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_driverManager_01.java",
+    "line": 176,
+    "rule": "java:S2068",
+    "severity": "MAJOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_003/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_passwordAuth_01.java",
+    "line": 214,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_003/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_passwordAuth_01.java",
+    "line": 210,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_003/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_passwordAuth_01.java",
+    "line": 134,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE319_003/src/CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_passwordAuth_01.java",
+    "line": 129,
+    "rule": "java:S2068",
+    "severity": "MAJOR",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE325_001/src/CWE325_Missing_Required_Cryptographic_Step__KeyGenerator_init_01.java",
+    "line": 78,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE325_001/src/CWE325_Missing_Required_Cryptographic_Step__KeyGenerator_init_01.java",
+    "line": 49,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE378_001/src/CWE378_File_Creation_With_Insecure_Perms__basic_01.java",
+    "line": 104,
+    "rule": "java:S5443",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE378_001/src/CWE378_File_Creation_With_Insecure_Perms__basic_01.java",
+    "line": 38,
+    "rule": "java:S5443",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE506_001/src/CWE506_Embedded_Malicious_Code__aes_encrypted_payload_01.java",
+    "line": 42,
+    "rule": "java:S6437",
+    "severity": "BLOCKER",
+    "status": "failed",
+    "error": "no response from Ollama"
+  },
+  {
+    "file": "sard_cases:test_cases/CWE506_001/src/CWE506_Embedded_Malicious_Code__aes_encrypted_payload_01.java",
+    "line": 38,
+    "rule": "java:S5542",
+    "severity": "CRITICAL",
+    "status": "failed",
+    "error": "no response from Ollama"
+  }
+]

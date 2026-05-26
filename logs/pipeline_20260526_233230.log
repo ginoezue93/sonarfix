@@ -1,0 +1,7 @@
+23:32:30 [INFO] pipeline — Pipeline started — 2026-05-26T23:32:30.304675
+23:32:30 [INFO] pipeline — 
+23:32:30 [INFO] pipeline — ==================================================
+23:32:30 [INFO] pipeline —   STEP 1 — FETCH SECURITY ISSUES
+23:32:30 [INFO] pipeline — ==================================================
+23:32:30 [INFO] fetch_issues — Fetching vulnerabilities from SonarQube...
+23:32:30 [DEBUG] urllib3.connectionpool — Starting new HTTP connection (1): localhost:9000

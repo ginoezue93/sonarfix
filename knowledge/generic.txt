@@ -1,0 +1,53 @@
+OWASP General Secure Coding Guidance
+
+Apply this guidance when no specific category matches. These rules cover the most
+common root causes of security vulnerabilities in Java applications.
+
+INPUT VALIDATION
+----------------
+- Validate all external input (HTTP parameters, file contents, network data)
+- Use a strict whitelist of allowed values/patterns where possible
+- Reject or sanitize input that does not match the expected format
+- Never trust data from the client side alone
+
+OUTPUT ENCODING
+---------------
+- Encode output according to the target context (HTML, SQL, URL, shell, XML)
+- Use established libraries; do not implement custom encoding
+
+ERROR HANDLING
+--------------
+- Do not expose stack traces, internal paths, or system details to users
+- Log detailed errors server-side; return generic messages to clients
+- Catch specific exceptions; avoid broad catch (Exception e) blocks
+- Always handle checked exceptions — do not silently swallow them
+
+UNCHECKED RETURN VALUES (CWE-252)
+----------------------------------
+- Check the return value of security-relevant operations (file.delete(), mkdir(), etc.)
+- Ignored return values from I/O operations can mask silent failures
+
+    // BEFORE (vulnerable — CWE-252)
+    file.delete();
+
+    // AFTER (secure)
+    if (!file.delete()) {
+        throw new IOException("Failed to delete file: " + file.getPath());
+    }
+
+RESOURCE MANAGEMENT
+--------------------
+- Always close streams, connections, and other resources in a finally block or try-with-resources
+- Use try-with-resources for all Closeable objects
+
+PRINCIPLE OF LEAST PRIVILEGE
+-----------------------------
+- Run application components with the minimum required permissions
+- Use restricted database accounts
+- Avoid System.exit() in library or servlet code (CWE-382)
+
+OWASP RULES
+-----------
+- Fail securely: deny by default, not allow by default
+- Defence in depth: do not rely on a single security control
+- Keep security logic simple; complex code hides bugs

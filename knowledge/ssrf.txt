@@ -1,0 +1,38 @@
+OWASP A10:2021 — Server-Side Request Forgery (CWE-918)
+
+SSRF allows attackers to make the server issue HTTP requests to arbitrary targets,
+including internal services not accessible from the internet.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- new URL(userInput).openConnection()
+- HttpURLConnection conn = (HttpURLConnection) new URL(userInput).openConnection()
+- Following redirects to attacker-controlled destinations
+
+REQUIRED FIX — Allowlist validation before opening connections:
+
+    // BEFORE (vulnerable)
+    URL url = new URL(userInput);
+    URLConnection conn = url.openConnection();
+
+    // AFTER (secure)
+    private static final Set<String> ALLOWED_HOSTS = Set.of("api.example.com");
+
+    URL url = new URL(userInput);
+    if (!ALLOWED_HOSTS.contains(url.getHost())) {
+        throw new SecurityException("Host not allowed: " + url.getHost());
+    }
+    // Also block internal addresses
+    InetAddress addr = InetAddress.getByName(url.getHost());
+    if (addr.isLoopbackAddress() || addr.isSiteLocalAddress()) {
+        throw new SecurityException("Access to internal addresses is blocked");
+    }
+    URLConnection conn = url.openConnection();
+
+OWASP RULES
+-----------
+- Maintain an explicit allowlist of permitted external hostnames
+- Resolve DNS and validate the IP before opening the connection
+- Block loopback (127.x), link-local (169.254.x), and RFC-1918 ranges
+- Disable automatic redirect following or validate redirect targets
+- Allow only http/https schemes; reject file://, gopher://, ftp://

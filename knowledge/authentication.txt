@@ -1,0 +1,52 @@
+OWASP A07:2021 — Identification and Authentication Failures
+
+Hardcoded credentials, cleartext transmission, and weak session management allow
+attackers to compromise accounts or impersonate users.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- String password = "admin123";
+- DriverManager.getConnection(url, "sa", "password");
+- Kerberos/JAAS keys hardcoded in source code
+- Plain Socket used instead of SSLSocket for authentication flows
+- Cleartext passwords sent over unencrypted connections (CWE-319)
+
+REQUIRED FIXES
+--------------
+Hardcoded credentials → load from environment:
+
+    // BEFORE (vulnerable)
+    String password = "hardcoded_password";
+    DriverManager.getConnection(url, "admin", "secret");
+
+    // AFTER (secure)
+    String password = System.getenv("DB_PASSWORD");
+    DriverManager.getConnection(url, System.getenv("DB_USER"), password);
+
+Cleartext socket connection → use SSL/TLS (CWE-319):
+
+    // BEFORE (vulnerable)
+    Socket socket = new Socket(host, port);
+    // sending credentials over plain socket
+
+    // AFTER (secure)
+    SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+    SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
+
+Cleartext password authentication → use hashed credentials:
+
+    // BEFORE (vulnerable)
+    PasswordAuthentication auth = new PasswordAuthentication("user", "plainpass".toCharArray());
+
+    // AFTER (secure)
+    // Load credentials from a secure vault or environment variable
+    char[] password = System.getenv("APP_PASSWORD").toCharArray();
+    PasswordAuthentication auth = new PasswordAuthentication("user", password);
+
+OWASP RULES
+-----------
+- Never hardcode credentials, tokens, or keys in source code
+- Use environment variables or a secrets manager
+- Always transmit credentials over TLS (SSLSocket, HttpsURLConnection)
+- Use strong password hashing (PBKDF2, BCrypt) for stored passwords
+- Clear char[] passwords from memory after use

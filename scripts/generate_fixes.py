@@ -52,15 +52,21 @@ def extract_block(file_path: Path, line: int, context: int = CODE_CONTEXT_LINES)
 
 def strip_markdown(code: str) -> str:
     import re
-    # DeepSeek R1 wraps its reasoning in <think>...</think> — drop it entirely
+    # Remove DeepSeek R1 think blocks
     code = re.sub(r"<think>.*?</think>", "", code, flags=re.DOTALL).strip()
-    # Strip markdown code fences if present
+    # Extract content from the last ```...``` block (model puts final answer last)
+    matches = re.findall(r"```(?:java)?\n(.*?)```", code, flags=re.DOTALL)
+    if matches:
+        return matches[-1].strip()
+    # No code fences — strip any leading explanation line before Java code
     lines = code.splitlines()
-    if lines and lines[0].startswith("```"):
-        lines = lines[1:]
-    if lines and lines[-1].strip() == "```":
-        lines = lines[:-1]
-    return "\n".join(lines)
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith(("import ", "public ", "private ", "protected ",
+                                 "class ", "//", "/*", "@", "if ", "for ",
+                                 "try ", "return ", "String ", "int ", "void ")):
+            return "\n".join(lines[i:]).strip()
+    return code.strip()
 
 
 def apply_block_fix(all_lines: list[str], start: int, end: int, fixed_code: str) -> list[str]:
@@ -81,9 +87,6 @@ def backup(file_path: Path) -> Path:
 
 
 def build_prompt(issue: dict, category: str, owasp: str, knowledge: str, code_block: str) -> str:
-    cwe_tag  = next(
-        (str(c) for c in issue.get("cwe", []) if c), "unknown"
-    )
     filename = Path(issue.get("file", "unknown")).name
 
     return f"""You are a senior application security engineer specializing in Java security and OWASP-compliant remediation.
@@ -91,7 +94,6 @@ def build_prompt(issue: dict, category: str, owasp: str, knowledge: str, code_bl
 VULNERABILITY
 =============
 File     : {filename}
-CWE      : {cwe_tag}
 Category : {category}
 OWASP    : {owasp}
 Severity : {issue.get("severity", "UNKNOWN")}
@@ -130,18 +132,27 @@ OUTPUT RULES
 """
 
 
-def query_ollama(prompt: str) -> str | None:
-    try:
-        r = requests.post(
-            OLLAMA_URL,
-            json={"model": MODEL, "prompt": prompt, "stream": False},
-            timeout=OLLAMA_TIMEOUT,
-        )
-        r.raise_for_status()
-        return r.json().get("response", "").strip()
-    except Exception as e:
-        log.error("Ollama request failed: %s", e)
-        return None
+def query_ollama(prompt: str, retries: int = 2) -> str | None:
+    for attempt in range(1, retries + 2):
+        try:
+            r = requests.post(
+                OLLAMA_URL,
+                json={
+                    "model": MODEL,
+                    "prompt": prompt,
+                    "stream": False,
+                    "options": {"num_ctx": 8192, "num_predict": 2048, "num_gpu": 999},
+                },
+                timeout=OLLAMA_TIMEOUT,
+            )
+            r.raise_for_status()
+            return r.json().get("response", "").strip()
+        except Exception as e:
+            log.warning("Ollama attempt %d/%d failed: %s", attempt, retries + 1, e)
+            if attempt == retries + 1:
+                log.error("All attempts failed")
+                return None
+    return None
 
 
 def run(issues_file=ISSUES_FILE, results_file=RESULTS_FILE) -> list[dict]:

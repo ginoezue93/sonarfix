@@ -4,11 +4,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent
 
 SONAR_URL   = "http://localhost:9000"
-SONAR_TOKEN = "DEIN_NEUER_TOKEN_HIER"
+SONAR_TOKEN = "sqp_3fdacd7596fb74d3f374798395330de6081af397"
 PROJECT_KEY = "sard_cases"
 
 OLLAMA_URL     = "http://localhost:11434/api/generate"
-MODEL          = "deepseek-r1:7b"
+MODEL          = "deepseek-coder:6.7b"
 OLLAMA_TIMEOUT = 300
 
 CODE_CONTEXT_LINES = 12
@@ -32,3 +32,5 @@ LIBS = [
 ]
 
 CP_SEP = ";" if sys.platform == "win32" else ":"
+
+SONAR_SCANNER = "sonar-scanner"

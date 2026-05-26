@@ -1,0 +1,1002 @@
+[
+  {
+    "file": "test_cases\\CWE113_001\\src\\CWE113_HTTP_Response_Splitting__listen_tcp_sendRedirectServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_002\\src\\CWE113_HTTP_Response_Splitting__console_readLine_addHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_003\\src\\CWE113_HTTP_Response_Splitting__getCookies_Servlet_sendRedirectServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_004\\src\\CWE113_HTTP_Response_Splitting__File_setHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_005\\src\\CWE113_HTTP_Response_Splitting__getParameter_Servlet_setHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_006\\src\\CWE113_HTTP_Response_Splitting__getCookies_Servlet_setHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_007\\src\\CWE113_HTTP_Response_Splitting__database_addHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_008\\src\\CWE113_HTTP_Response_Splitting__getCookies_Servlet_addHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_009\\src\\CWE113_HTTP_Response_Splitting__database_addCookieServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_010\\src\\CWE113_HTTP_Response_Splitting__database_sendRedirectServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_011\\src\\CWE113_HTTP_Response_Splitting__getQueryString_Servlet_addCookieServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_012\\src\\CWE113_HTTP_Response_Splitting__console_readLine_setHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_013\\src\\CWE113_HTTP_Response_Splitting__File_addHeaderServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE113_014\\src\\CWE113_HTTP_Response_Splitting__getCookies_Servlet_addCookieServlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_001\\src\\CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_read_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_002\\src\\CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_min_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_003\\src\\CWE129_Improper_Validation_of_Array_Index__listen_tcp_array_read_check_min_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_004\\src\\CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_005\\src\\CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_write_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_006\\src\\CWE129_Improper_Validation_of_Array_Index__listen_tcp_array_write_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_007\\src\\CWE129_Improper_Validation_of_Array_Index__database_array_read_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_008\\src\\CWE129_Improper_Validation_of_Array_Index__Environment_array_read_check_min_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_009\\src\\CWE129_Improper_Validation_of_Array_Index__random_array_read_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_010\\src\\CWE129_Improper_Validation_of_Array_Index__large_fixed_array_write_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE129_011\\src\\CWE129_Improper_Validation_of_Array_Index__File_array_read_no_check_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE134_001\\src\\CWE134_Uncontrolled_Format_String__PropertiesFile_format_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE134_002\\src\\CWE134_Uncontrolled_Format_String__Property_printf_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_001\\src\\CWE190_Integer_Overflow__long_rand_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_002\\src\\CWE190_Integer_Overflow__byte_rand_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_003\\src\\CWE190_Integer_Overflow__byte_console_readLine_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_004\\src\\CWE190_Integer_Overflow__int_File_add_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_005\\src\\CWE190_Integer_Overflow__int_Environment_add_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_006\\src\\CWE190_Integer_Overflow__int_max_add_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_007\\src\\CWE190_Integer_Overflow__short_max_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_008\\src\\CWE190_Integer_Overflow__int_URLConnection_add_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_009\\src\\CWE190_Integer_Overflow__int_connect_tcp_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_010\\src\\CWE190_Integer_Overflow__int_listen_tcp_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_011\\src\\CWE190_Integer_Overflow__short_rand_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_012\\src\\CWE190_Integer_Overflow__int_database_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_013\\src\\CWE190_Integer_Overflow__long_max_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_014\\src\\CWE190_Integer_Overflow__int_Property_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_015\\src\\CWE190_Integer_Overflow__int_Property_add_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE190_016\\src\\CWE190_Integer_Overflow__long_max_square_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_001\\src\\CWE191_Integer_Underflow__int_getQueryString_Servlet_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_002\\src\\CWE191_Integer_Underflow__int_listen_tcp_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_003\\src\\CWE191_Integer_Underflow__int_getCookies_Servlet_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_004\\src\\CWE191_Integer_Underflow__int_connect_tcp_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_005\\src\\CWE191_Integer_Underflow__int_getParameter_Servlet_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_006\\src\\CWE191_Integer_Underflow__int_File_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_007\\src\\CWE191_Integer_Underflow__short_rand_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_008\\src\\CWE191_Integer_Underflow__short_min_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_009\\src\\CWE191_Integer_Underflow__int_listen_tcp_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_010\\src\\CWE191_Integer_Underflow__int_File_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_011\\src\\CWE191_Integer_Underflow__long_min_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_012\\src\\CWE191_Integer_Underflow__int_min_sub_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE191_013\\src\\CWE191_Integer_Underflow__short_min_multiply_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE23_001\\src\\CWE23_Relative_Path_Traversal__URLConnection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE23_002\\src\\CWE23_Relative_Path_Traversal__getCookies_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE23_003\\src\\CWE23_Relative_Path_Traversal__listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE23_004\\src\\CWE23_Relative_Path_Traversal__File_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE23_005\\src\\CWE23_Relative_Path_Traversal__console_readLine_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE252_001\\src\\CWE252_Unchecked_Return_Value__FileInputStream_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE259_001\\src\\CWE259_Hard_Coded_Password__kerberosKey_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE319_001\\src\\CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_kerberosKey_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE319_002\\src\\CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_driverManager_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE319_003\\src\\CWE319_Cleartext_Tx_Sensitive_Info__connect_tcp_passwordAuth_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE325_001\\src\\CWE325_Missing_Required_Cryptographic_Step__KeyGenerator_init_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_001\\src\\CWE369_Divide_by_Zero__int_getQueryString_Servlet_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_002\\src\\CWE369_Divide_by_Zero__int_PropertiesFile_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_003\\src\\CWE369_Divide_by_Zero__int_Property_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_004\\src\\CWE369_Divide_by_Zero__int_database_divide_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_005\\src\\CWE369_Divide_by_Zero__float_File_divide_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_006\\src\\CWE369_Divide_by_Zero__int_zero_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_007\\src\\CWE369_Divide_by_Zero__float_random_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_008\\src\\CWE369_Divide_by_Zero__int_URLConnection_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_009\\src\\CWE369_Divide_by_Zero__float_URLConnection_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_010\\src\\CWE369_Divide_by_Zero__float_zero_divide_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_011\\src\\CWE369_Divide_by_Zero__float_zero_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_012\\src\\CWE369_Divide_by_Zero__int_getParameter_Servlet_modulo_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_013\\src\\CWE369_Divide_by_Zero__int_getQueryString_Servlet_divide_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE369_014\\src\\CWE369_Divide_by_Zero__int_listen_tcp_divide_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE36_001\\src\\CWE36_Absolute_Path_Traversal__File_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE36_002\\src\\CWE36_Absolute_Path_Traversal__database_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE378_001\\src\\CWE378_File_Creation_With_Insecure_Perms__basic_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE379_001\\src\\CWE379_File_Creation_in_Insecure_Dir__basic_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE382_001\\src\\CWE382_Use_of_System_Exit__Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE396_001\\src\\CWE396_Catch_Generic_Exception__Exception_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE397_001\\src\\CWE397_Throw_Generic__declare_Exception_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE398_001\\src\\CWE398_Poor_Code_Quality__semicolon_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_001\\src\\CWE400_Resource_Exhaustion__console_readLine_for_loop_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_002\\src\\CWE400_Resource_Exhaustion__getParameter_Servlet_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_003\\src\\CWE400_Resource_Exhaustion__connect_tcp_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_004\\src\\CWE400_Resource_Exhaustion__database_for_loop_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_005\\src\\CWE400_Resource_Exhaustion__PropertiesFile_for_loop_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_006\\src\\CWE400_Resource_Exhaustion__getCookies_Servlet_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_007\\src\\CWE400_Resource_Exhaustion__listen_tcp_for_loop_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_008\\src\\CWE400_Resource_Exhaustion__listen_tcp_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_009\\src\\CWE400_Resource_Exhaustion__File_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_010\\src\\CWE400_Resource_Exhaustion__random_for_loop_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_011\\src\\CWE400_Resource_Exhaustion__Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE400_012\\src\\CWE400_Resource_Exhaustion__max_value_write_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_001\\src\\CWE470_Unsafe_Reflection__getQueryString_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_002\\src\\CWE470_Unsafe_Reflection__Environment_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_003\\src\\CWE470_Unsafe_Reflection__getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_004\\src\\CWE470_Unsafe_Reflection__getCookies_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_005\\src\\CWE470_Unsafe_Reflection__Property_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE470_006\\src\\CWE470_Unsafe_Reflection__console_readLine_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE476_001\\src\\CWE476_NULL_Pointer_Dereference__StringBuilder_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE477_001\\src\\CWE477_Obsolete_Functions__String_getBytes_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE477_002\\src\\CWE477_Obsolete_Functions__Date_parse_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE478_001\\src\\CWE478_Missing_Default_Case_in_Switch__basic_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE484_001\\src\\CWE484_Omitted_Break_Statement_in_Switch__basic_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE506_001\\src\\CWE506_Embedded_Malicious_Code__aes_encrypted_payload_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE506_002\\src\\CWE506_Embedded_Malicious_Code__screen_capture_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE506_003\\src\\CWE506_Embedded_Malicious_Code__file_transfer_listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE510_001\\src\\CWE510_Trapdoor__network_connection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE510_002\\src\\CWE510_Trapdoor__network_listen_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE511_001\\src\\CWE511_Logic_Time_Bomb__time_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE511_002\\src\\CWE511_Logic_Time_Bomb__counter_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE514_001\\src\\CWE514_Covert_Channel__basic_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE535_001\\src\\CWE535_Info_Exposure_Shell_Error__Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE546_001\\src\\CWE546_Suspicious_Comment__TODO_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE546_002\\src\\CWE546_Suspicious_Comment__FIXME_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE546_003\\src\\CWE546_Suspicious_Comment__HACK_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE563_001\\src\\CWE563_Unused_Variable__unused_value_StringBuilder_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE563_002\\src\\CWE563_Unused_Variable__unused_init_variable_long_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE570_001\\src\\CWE570_Expression_Always_False__string_equals_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE570_002\\src\\CWE570_Expression_Always_False__n_equal_n_minus_one_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE571_001\\src\\CWE571_Expression_Always_True__string_equals_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE571_002\\src\\CWE571_Expression_Always_True__n_equal_m_minus_one_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE579_001\\src\\CWE579_Non_Serializable_in_Session__Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_001\\src\\CWE601_Open_Redirect__Servlet_File_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_002\\src\\CWE601_Open_Redirect__Servlet_getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_003\\src\\CWE601_Open_Redirect__Servlet_database_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_004\\src\\CWE601_Open_Redirect__Servlet_PropertiesFile_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_005\\src\\CWE601_Open_Redirect__Servlet_URLConnection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE601_006\\src\\CWE601_Open_Redirect__Servlet_getQueryString_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE606_001\\src\\CWE606_Unchecked_Loop_Condition__listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE606_002\\src\\CWE606_Unchecked_Loop_Condition__URLConnection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE606_003\\src\\CWE606_Unchecked_Loop_Condition__getCookies_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE617_001\\src\\CWE617_Reachable_Assertion__false_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE617_002\\src\\CWE617_Reachable_Assertion__length_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE643_001\\src\\CWE643_Xpath_Injection__Environment_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE643_002\\src\\CWE643_Xpath_Injection__getQueryString_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE643_003\\src\\CWE643_Xpath_Injection__database_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE643_004\\src\\CWE643_Xpath_Injection__getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE690_001\\src\\CWE690_NULL_Deref_From_Return__getParameter_Servlet_trim_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE690_002\\src\\CWE690_NULL_Deref_From_Return__Properties_getProperty_trim_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE760_001\\src\\CWE760_Predictable_Salt_One_Way_Hash__PropertiesFile_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE760_002\\src\\CWE760_Predictable_Salt_One_Way_Hash__listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE760_003\\src\\CWE760_Predictable_Salt_One_Way_Hash__getQueryString_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE765_001\\src\\CWE765_Multiple_Unlocks__ReentrantLock_Thread_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE784_001\\src\\CWE784_Reliance_on_Cookies_in_a_Security_Decision__Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_001\\src\\CWE789_Uncontrolled_Mem_Alloc__File_HashMap_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_002\\src\\CWE789_Uncontrolled_Mem_Alloc__getQueryString_Servlet_HashMap_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_003\\src\\CWE789_Uncontrolled_Mem_Alloc__getCookies_Servlet_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_004\\src\\CWE789_Uncontrolled_Mem_Alloc__max_value_ArrayList_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_005\\src\\CWE789_Uncontrolled_Mem_Alloc__random_ArrayList_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_006\\src\\CWE789_Uncontrolled_Mem_Alloc__getQueryString_Servlet_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_007\\src\\CWE789_Uncontrolled_Mem_Alloc__console_readLine_HashMap_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_008\\src\\CWE789_Uncontrolled_Mem_Alloc__Property_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_009\\src\\CWE789_Uncontrolled_Mem_Alloc__listen_tcp_HashMap_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_010\\src\\CWE789_Uncontrolled_Mem_Alloc__Property_ArrayList_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_011\\src\\CWE789_Uncontrolled_Mem_Alloc__listen_tcp_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_012\\src\\CWE789_Uncontrolled_Mem_Alloc__console_readLine_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_013\\src\\CWE789_Uncontrolled_Mem_Alloc__getCookies_Servlet_ArrayList_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE789_014\\src\\CWE789_Uncontrolled_Mem_Alloc__database_HashSet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE78_001\\src\\CWE78_OS_Command_Injection__connect_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE78_002\\src\\CWE78_OS_Command_Injection__listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE80_001\\src\\CWE80_XSS__Servlet_URLConnection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE80_002\\src\\CWE80_XSS__CWE182_getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE81_001\\src\\CWE81_XSS_Error_Message__Servlet_URLConnection_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE81_002\\src\\CWE81_XSS_Error_Message__Servlet_listen_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE81_003\\src\\CWE81_XSS_Error_Message__Servlet_getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE81_004\\src\\CWE81_XSS_Error_Message__Servlet_database_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE832_001\\src\\CWE832_Unlock_Not_Locked__ReentrantLock_Thread_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE833_001\\src\\CWE833_Deadlock__ReentrantLock_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE833_002\\src\\CWE833_Deadlock__ReentrantLock_Thread_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE833_003\\src\\CWE833_Deadlock__synchronized_Objects_Thread_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE835_001\\src\\CWE835_Infinite_Loop__while_true_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE835_002\\src\\CWE835_Infinite_Loop__for_empty_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE83_001\\src\\CWE83_XSS_Attribute__Servlet_getParameter_Servlet_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_001\\src\\CWE89_SQL_Injection__getCookies_Servlet_executeBatch_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_002\\src\\CWE89_SQL_Injection__File_executeQuery_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_003\\src\\CWE89_SQL_Injection__getParameter_Servlet_execute_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_004\\src\\CWE89_SQL_Injection__PropertiesFile_executeUpdate_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_005\\src\\CWE89_SQL_Injection__getCookies_Servlet_execute_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_006\\src\\CWE89_SQL_Injection__Environment_execute_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_007\\src\\CWE89_SQL_Injection__listen_tcp_executeQuery_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_008\\src\\CWE89_SQL_Injection__database_executeUpdate_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_009\\src\\CWE89_SQL_Injection__File_executeUpdate_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_010\\src\\CWE89_SQL_Injection__Property_executeQuery_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_011\\src\\CWE89_SQL_Injection__Environment_prepareStatement_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_012\\src\\CWE89_SQL_Injection__console_readLine_executeQuery_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_013\\src\\CWE89_SQL_Injection__getQueryString_Servlet_execute_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_014\\src\\CWE89_SQL_Injection__database_execute_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_015\\src\\CWE89_SQL_Injection__connect_tcp_executeUpdate_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_016\\src\\CWE89_SQL_Injection__getParameter_Servlet_executeBatch_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE89_017\\src\\CWE89_SQL_Injection__File_executeBatch_01.java",
+    "status": "ok",
+    "error": ""
+  },
+  {
+    "file": "test_cases\\CWE90_001\\src\\CWE90_LDAP_Injection__connect_tcp_01.java",
+    "status": "ok",
+    "error": ""
+  }
+]

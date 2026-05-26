@@ -4,7 +4,7 @@ import time
 
 import requests
 
-from config import BASE_DIR, SONAR_TOKEN
+from config import BASE_DIR, SONAR_TOKEN, SONAR_SCANNER
 
 log = logging.getLogger(__name__)
 
@@ -16,10 +16,11 @@ POLL_TIMEOUT     = 300
 def run_sonar_scanner() -> tuple[bool, str]:
     log.info("Running sonar-scanner from %s", BASE_DIR)
     result = subprocess.run(
-        ["sonar-scanner"],
+        [SONAR_SCANNER],
         cwd=str(BASE_DIR),
         capture_output=True,
         text=True,
+        shell=True,
     )
     return result.returncode == 0, result.stdout + result.stderr
 

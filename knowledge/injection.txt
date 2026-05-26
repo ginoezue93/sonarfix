@@ -1,0 +1,39 @@
+OWASP A03:2021 — Injection (SQL, LDAP, OS Command, XPath)
+
+Injection flaws occur when untrusted data is sent to an interpreter as part of a
+command or query. The attacker can read, modify, or delete arbitrary data.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- String concatenation into SQL: "SELECT * FROM t WHERE id = '" + userInput + "'"
+- Runtime.exec() with user input: Runtime.getRuntime().exec(cmd + userInput)
+- Dynamic LDAP filters with unsanitized input
+
+REQUIRED FIXES
+--------------
+SQL Injection → Use PreparedStatement:
+
+    // BEFORE (vulnerable)
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id = '" + data + "'");
+
+    // AFTER (secure)
+    PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+    ps.setString(1, data);
+    ResultSet rs = ps.executeQuery();
+
+OS Command Injection → Use ProcessBuilder with argument list (never string concat):
+
+    // BEFORE (vulnerable)
+    Runtime.getRuntime().exec("ping " + host);
+
+    // AFTER (secure)
+    new ProcessBuilder("ping", host).start();
+
+OWASP RULES
+-----------
+- Never concatenate user-controlled values into SQL strings
+- Always use parameterized queries or prepared statements
+- Validate input against a strict whitelist before use
+- Use least-privilege database accounts
+- For OS commands: use ProcessBuilder with explicit argument arrays

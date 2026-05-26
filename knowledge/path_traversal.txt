@@ -1,0 +1,51 @@
+OWASP A01:2021 — Broken Access Control: Path Traversal (CWE-22, CWE-23, CWE-36)
+
+Path traversal vulnerabilities allow attackers to read or write files outside the
+intended directory by injecting sequences like "../" into file path parameters.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- new File(baseDir, userInput)           → no canonicalization check
+- new FileInputStream(userInput)         → fully attacker-controlled path
+- Paths.get(baseDir).resolve(userInput)  → without normalize() and startsWith() check
+
+RELATIVE PATH TRAVERSAL FIX (CWE-23):
+
+    // BEFORE (vulnerable)
+    File f = new File(userInput);
+    FileInputStream fis = new FileInputStream(f);
+
+    // AFTER (secure)
+    File base   = new File("/safe/base/dir").getCanonicalFile();
+    File target = new File(base, userInput).getCanonicalFile();
+    if (!target.getPath().startsWith(base.getPath() + File.separator)) {
+        throw new SecurityException("Path traversal detected");
+    }
+    FileInputStream fis = new FileInputStream(target);
+
+ABSOLUTE PATH TRAVERSAL FIX (CWE-36) — same pattern:
+
+    // BEFORE (vulnerable)
+    File f = new File(data);   // data could be "/etc/passwd"
+
+    // AFTER (secure)
+    File base   = new File("/allowed/directory").getCanonicalFile();
+    File target = new File(data).getCanonicalFile();
+    if (!target.getPath().startsWith(base.getPath() + File.separator)) {
+        throw new SecurityException("Path traversal detected");
+    }
+
+JAVA NIO ALTERNATIVE (preferred for new code):
+
+    Path base   = Paths.get("/safe/base/dir").toAbsolutePath().normalize();
+    Path target = base.resolve(userInput).normalize();
+    if (!target.startsWith(base)) {
+        throw new SecurityException("Path traversal detected");
+    }
+
+OWASP RULES
+-----------
+- Always call getCanonicalFile() or normalize() to resolve ".." segments
+- Check that the resolved path starts with the intended base directory
+- Never use user input directly as a file path without validation
+- Prefer a filename whitelist over a blocklist when possible

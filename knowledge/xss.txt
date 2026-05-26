@@ -1,0 +1,46 @@
+OWASP A03:2021 — XSS & HTTP Response Splitting (CWE-79, CWE-113)
+
+Untrusted data written to HTTP responses without encoding allows attackers to inject
+scripts (XSS) or split HTTP responses by embedding CR/LF characters.
+
+COMMON VULNERABLE PATTERNS IN JAVA
+------------------------------------
+- response.getWriter().print(userInput)              → reflected XSS
+- response.addHeader("Location", userInput)          → HTTP response splitting
+- response.setHeader("X-Custom", userInput)          → HTTP response splitting
+- response.addCookie(new Cookie("name", userInput))  → cookie injection
+- response.sendRedirect(userInput)                   → open redirect + splitting
+
+HTTP RESPONSE SPLITTING FIX (CWE-113)
+--------------------------------------
+CR/LF characters (\r, \n) in header values split the HTTP response into two responses.
+Fix: strip all CR and LF characters from any user-supplied value before use.
+
+    // BEFORE (vulnerable)
+    response.addHeader("Location", data);
+    response.setHeader("test", data);
+    response.sendRedirect(data);
+    response.addCookie(new Cookie("name", data));
+
+    // AFTER (secure)
+    String safe = data.replaceAll("[\r\n]", "");
+    response.addHeader("Location", safe);
+    response.setHeader("test", safe);
+    response.sendRedirect(safe);
+    response.addCookie(new Cookie("name", safe));
+
+XSS FIX — HTML output encoding:
+
+    // BEFORE (vulnerable)
+    response.getWriter().print(request.getParameter("name"));
+
+    // AFTER (secure — Apache Commons Text)
+    import org.apache.commons.text.StringEscapeUtils;
+    response.getWriter().print(StringEscapeUtils.escapeHtml4(request.getParameter("name")));
+
+OWASP RULES
+-----------
+- Strip \r and \n from ALL values placed into HTTP headers or cookies
+- HTML-encode all user-controlled data written to the response body
+- Use HttpOnly and Secure flags on cookies
+- Set Content-Security-Policy headers to restrict script execution
