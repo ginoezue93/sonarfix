@@ -1,0 +1,506 @@
+{
+  "seed": 1337,
+  "requested": 100,
+  "selected": [
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE81_XSS_Error_Message\\CWE81_XSS_Error_Message__Servlet_connect_tcp_01.java",
+      "case_dir": "CWE81_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE760_Predictable_Salt_One_Way_Hash\\CWE760_Predictable_Salt_One_Way_Hash__console_readLine_01.java",
+      "case_dir": "CWE760_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE90_LDAP_Injection\\CWE90_LDAP_Injection__database_01.java",
+      "case_dir": "CWE90_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE400_Resource_Exhaustion\\CWE400_Resource_Exhaustion__File_write_01.java",
+      "case_dir": "CWE400_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__getParameter_Servlet_HashMap_01.java",
+      "case_dir": "CWE789_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__Property_ArrayList_01.java",
+      "case_dir": "CWE789_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__int_Property_add_01.java",
+      "case_dir": "CWE190_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE36_Absolute_Path_Traversal\\CWE36_Absolute_Path_Traversal__getCookies_Servlet_01.java",
+      "case_dir": "CWE36_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE400_Resource_Exhaustion\\CWE400_Resource_Exhaustion__URLConnection_for_loop_01.java",
+      "case_dir": "CWE400_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE835_Infinite_Loop\\CWE835_Infinite_Loop__do_true_01.java",
+      "case_dir": "CWE835_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE400_Resource_Exhaustion\\CWE400_Resource_Exhaustion__console_readLine_write_01.java",
+      "case_dir": "CWE400_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE369_Divide_by_Zero\\CWE369_Divide_by_Zero__int_File_divide_01.java",
+      "case_dir": "CWE369_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE470_Unsafe_Reflection\\CWE470_Unsafe_Reflection__Environment_01.java",
+      "case_dir": "CWE470_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__PropertiesFile_prepareStatement_01.java",
+      "case_dir": "CWE89_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE191_Integer_Underflow\\CWE191_Integer_Underflow__int_Environment_sub_01.java",
+      "case_dir": "CWE191_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__console_readLine_executeUpdate_01.java",
+      "case_dir": "CWE89_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE400_Resource_Exhaustion\\CWE400_Resource_Exhaustion__File_for_loop_01.java",
+      "case_dir": "CWE400_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE134_Uncontrolled_Format_String\\CWE134_Uncontrolled_Format_String__console_readLine_printf_01.java",
+      "case_dir": "CWE134_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE510_Trapdoor\\CWE510_Trapdoor__ip_based_logic_01.java",
+      "case_dir": "CWE510_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE90_LDAP_Injection\\CWE90_LDAP_Injection__PropertiesFile_01.java",
+      "case_dir": "CWE90_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE470_Unsafe_Reflection\\CWE470_Unsafe_Reflection__URLConnection_01.java",
+      "case_dir": "CWE470_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__File_array_read_check_max_01.java",
+      "case_dir": "CWE129_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE617_Reachable_Assertion\\CWE617_Reachable_Assertion__length_01.java",
+      "case_dir": "CWE617_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__File_execute_01.java",
+      "case_dir": "CWE89_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE396_Catch_Generic_Exception\\CWE396_Catch_Generic_Exception__Throwable_01.java",
+      "case_dir": "CWE396_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE477_Obsolete_Functions\\CWE477_Obsolete_Functions__DataInputStream_readLine_01.java",
+      "case_dir": "CWE477_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__PropertiesFile_executeBatch_01.java",
+      "case_dir": "CWE89_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE369_Divide_by_Zero\\CWE369_Divide_by_Zero__int_getCookies_Servlet_modulo_01.java",
+      "case_dir": "CWE369_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__Environment_execute_01.java",
+      "case_dir": "CWE89_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__File_addHeaderServlet_01.java",
+      "case_dir": "CWE113_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE398_Poor_Code_Quality\\CWE398_Poor_Code_Quality__empty_block_01.java",
+      "case_dir": "CWE398_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE78_OS_Command_Injection\\CWE78_OS_Command_Injection__connect_tcp_01.java",
+      "case_dir": "CWE78_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE134_Uncontrolled_Format_String\\CWE134_Uncontrolled_Format_String__PropertiesFile_printf_01.java",
+      "case_dir": "CWE134_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE570_Expression_Always_False\\CWE570_Expression_Always_False__n_less_int_min_01.java",
+      "case_dir": "CWE570_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE23_Relative_Path_Traversal\\CWE23_Relative_Path_Traversal__getQueryString_Servlet_01.java",
+      "case_dir": "CWE23_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__int_URLConnection_add_01.java",
+      "case_dir": "CWE190_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE369_Divide_by_Zero\\CWE369_Divide_by_Zero__int_getQueryString_Servlet_divide_01.java",
+      "case_dir": "CWE369_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__getParameter_Servlet_executeBatch_01.java",
+      "case_dir": "CWE89_006",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE78_OS_Command_Injection\\CWE78_OS_Command_Injection__URLConnection_01.java",
+      "case_dir": "CWE78_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE570_Expression_Always_False\\CWE570_Expression_Always_False__class_getClass_equal_01.java",
+      "case_dir": "CWE570_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE78_OS_Command_Injection\\CWE78_OS_Command_Injection__PropertiesFile_01.java",
+      "case_dir": "CWE78_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE319_Cleartext_Tx_Sensitive_Info\\CWE319_Cleartext_Tx_Sensitive_Info__send_01.java",
+      "case_dir": "CWE319_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE191_Integer_Underflow\\CWE191_Integer_Underflow__int_console_readLine_sub_01.java",
+      "case_dir": "CWE191_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE765_Multiple_Unlocks\\CWE765_Multiple_Unlocks__ReentrantLock_Thread_01.java",
+      "case_dir": "CWE765_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__File_array_read_no_check_01.java",
+      "case_dir": "CWE129_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE835_Infinite_Loop\\CWE835_Infinite_Loop__while_01.java",
+      "case_dir": "CWE835_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE690_NULL_Deref_From_Return\\CWE690_NULL_Deref_From_Return__getParameter_Servlet_trim_01.java",
+      "case_dir": "CWE690_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE81_XSS_Error_Message\\CWE81_XSS_Error_Message__Servlet_database_01.java",
+      "case_dir": "CWE81_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__listen_tcp_HashMap_01.java",
+      "case_dir": "CWE789_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__Property_setHeaderServlet_01.java",
+      "case_dir": "CWE113_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_write_no_check_01.java",
+      "case_dir": "CWE129_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE478_Missing_Default_Case_in_Switch\\CWE478_Missing_Default_Case_in_Switch__basic_01.java",
+      "case_dir": "CWE478_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__connect_tcp_prepareStatement_01.java",
+      "case_dir": "CWE89_007",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE81_XSS_Error_Message\\CWE81_XSS_Error_Message__Servlet_File_01.java",
+      "case_dir": "CWE81_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__console_readLine_array_read_check_min_01.java",
+      "case_dir": "CWE129_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__File_addCookieServlet_01.java",
+      "case_dir": "CWE113_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__Property_executeQuery_01.java",
+      "case_dir": "CWE89_008",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE191_Integer_Underflow\\CWE191_Integer_Underflow__byte_rand_sub_01.java",
+      "case_dir": "CWE191_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__database_prepareStatement_01.java",
+      "case_dir": "CWE89_009",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__URLConnection_array_write_no_check_01.java",
+      "case_dir": "CWE129_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE369_Divide_by_Zero\\CWE369_Divide_by_Zero__float_Environment_divide_01.java",
+      "case_dir": "CWE369_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__database_executeUpdate_01.java",
+      "case_dir": "CWE89_010",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE563_Unused_Variable\\CWE563_Unused_Variable__unused_value_int_01.java",
+      "case_dir": "CWE563_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__getCookies_Servlet_HashSet_01.java",
+      "case_dir": "CWE789_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__getQueryString_Servlet_execute_01.java",
+      "case_dir": "CWE89_011",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__database_setHeaderServlet_01.java",
+      "case_dir": "CWE113_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE80_XSS\\CWE80_XSS__Servlet_File_01.java",
+      "case_dir": "CWE80_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE36_Absolute_Path_Traversal\\CWE36_Absolute_Path_Traversal__getParameter_Servlet_01.java",
+      "case_dir": "CWE36_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE523_Unprotected_Cred_Transport\\CWE523_Unprotected_Cred_Transport__Servlet_01.java",
+      "case_dir": "CWE523_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__getParameter_Servlet_HashSet_01.java",
+      "case_dir": "CWE789_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE191_Integer_Underflow\\CWE191_Integer_Underflow__long_rand_multiply_01.java",
+      "case_dir": "CWE191_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE772_Missing_Release_of_Resource\\CWE772_Missing_Release_of_Resource__db_Connection_01.java",
+      "case_dir": "CWE772_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__URLConnection_addHeaderServlet_01.java",
+      "case_dir": "CWE113_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__console_readLine_ArrayList_01.java",
+      "case_dir": "CWE789_006",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE83_XSS_Attribute\\CWE83_XSS_Attribute__Servlet_listen_tcp_01.java",
+      "case_dir": "CWE83_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE369_Divide_by_Zero\\CWE369_Divide_by_Zero__int_Environment_modulo_01.java",
+      "case_dir": "CWE369_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE191_Integer_Underflow\\CWE191_Integer_Underflow__int_listen_tcp_multiply_01.java",
+      "case_dir": "CWE191_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE80_XSS\\CWE80_XSS__Servlet_getCookies_Servlet_01.java",
+      "case_dir": "CWE80_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__long_rand_multiply_01.java",
+      "case_dir": "CWE190_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE690_NULL_Deref_From_Return\\CWE690_NULL_Deref_From_Return__System_getProperty_equals_01.java",
+      "case_dir": "CWE690_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE690_NULL_Deref_From_Return\\CWE690_NULL_Deref_From_Return__Properties_getProperty_equals_01.java",
+      "case_dir": "CWE690_003",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE83_XSS_Attribute\\CWE83_XSS_Attribute__Servlet_database_01.java",
+      "case_dir": "CWE83_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__short_console_readLine_square_01.java",
+      "case_dir": "CWE190_004",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_read_check_min_01.java",
+      "case_dir": "CWE129_006",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE606_Unchecked_Loop_Condition\\CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_01.java",
+      "case_dir": "CWE606_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__PropertiesFile_HashMap_01.java",
+      "case_dir": "CWE789_007",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE563_Unused_Variable\\CWE563_Unused_Variable__unused_value_StringBuilder_01.java",
+      "case_dir": "CWE563_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE113_HTTP_Response_Splitting\\CWE113_HTTP_Response_Splitting__getParameter_Servlet_addCookieServlet_01.java",
+      "case_dir": "CWE113_006",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE681_Incorrect_Conversion_Between_Numeric_Types\\CWE681_Incorrect_Conversion_Between_Numeric_Types__floatNaN2int_01.java",
+      "case_dir": "CWE681_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE606_Unchecked_Loop_Condition\\CWE606_Unchecked_Loop_Condition__connect_tcp_01.java",
+      "case_dir": "CWE606_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE760_Predictable_Salt_One_Way_Hash\\CWE760_Predictable_Salt_One_Way_Hash__Property_01.java",
+      "case_dir": "CWE760_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__listen_tcp_executeBatch_01.java",
+      "case_dir": "CWE89_012",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE789_Uncontrolled_Mem_Alloc\\CWE789_Uncontrolled_Mem_Alloc__database_ArrayList_01.java",
+      "case_dir": "CWE789_008",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__URLConnection_executeBatch_01.java",
+      "case_dir": "CWE89_013",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE259_Hard_Coded_Password\\CWE259_Hard_Coded_Password__passwordAuth_01.java",
+      "case_dir": "CWE259_001",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE319_Cleartext_Tx_Sensitive_Info\\CWE319_Cleartext_Tx_Sensitive_Info__listen_tcp_driverManager_01.java",
+      "case_dir": "CWE319_002",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE89_SQL_Injection\\CWE89_SQL_Injection__getCookies_Servlet_executeQuery_01.java",
+      "case_dir": "CWE89_014",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__byte_rand_add_01.java",
+      "case_dir": "CWE190_005",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE129_Improper_Validation_of_Array_Index\\CWE129_Improper_Validation_of_Array_Index__database_array_read_no_check_01.java",
+      "case_dir": "CWE129_007",
+      "compiled": true
+    },
+    {
+      "source": "d:\\bachekor\\test_cases\\src\\testcases\\CWE190_Integer_Overflow\\CWE190_Integer_Overflow__int_random_square_01.java",
+      "case_dir": "CWE190_006",
+      "compiled": true
+    }
+  ]
+}

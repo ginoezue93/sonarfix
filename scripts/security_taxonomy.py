@@ -137,6 +137,6 @@ def classify_issue(issue: dict) -> tuple[str, dict]:
     if cwe:
         cat, data = classify_by_cwe(cwe)
         if cat != "generic":
-            return cat, data
+            return cat, dataW
 
     return "generic", TAXONOMY["generic"]

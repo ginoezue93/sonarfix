@@ -2,7 +2,7 @@ import requests
 import json
 
 SONAR_URL = "http://localhost:9000"
-TOKEN = "DEIN_TOKEN"
+TOKEN = "sqp_3fdacd7596fb74d3f374798395330de6081af397"
 PROJECT_KEY = "sard_cases"
 
 response = requests.get(

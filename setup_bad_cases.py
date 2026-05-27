@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import json
 import random
 import shutil
 import subprocess
@@ -22,6 +23,7 @@ JULIET_SRC     = Path("d:/bachekor/test_cases/src/testcases")
 SUPPORT_CLASSES = Path("d:/bachekor/test_cases/bin/support_classes")
 LIBS_DIR       = PIPELINE_DIR / "lib"
 TEST_CASES_DIR = PIPELINE_DIR / "test_cases"
+DEFAULT_MANIFEST = PIPELINE_DIR / "reports" / "sample_manifest.json"
 
 LIBS = [
     LIBS_DIR / "servlet-api.jar",
@@ -45,14 +47,14 @@ def clear_test_cases():
     print(f"Removed {removed} existing test case directories.")
 
 
-def select_files(n: int) -> list[Path]:
+def select_files(n: int, seed: int) -> list[Path]:
     all_files = sorted(JULIET_SRC.rglob("*_01.java"))
     all_files = [
         f for f in all_files
         if f.name not in ("Main.java", "ServletMain.java")
     ]
-    chosen = random.sample(all_files, min(n, len(all_files)))
-    print(f"Selected {len(chosen)} test files from {len(all_files)} available.")
+    chosen = random.Random(seed).sample(all_files, min(n, len(all_files)))
+    print(f"Selected {len(chosen)} test files from {len(all_files)} available (seed={seed}).")
     return chosen
 
 
@@ -89,6 +91,13 @@ def compile_test(java_file: Path, out_dir: Path) -> tuple[bool, str]:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--n", type=int, default=200, help="Number of test cases")
+    parser.add_argument("--seed", type=int, default=1337, help="Reproducible sampling seed")
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=DEFAULT_MANIFEST,
+        help="Path for the selected input manifest",
+    )
     args = parser.parse_args()
 
     if not SUPPORT_CLASSES.exists():
@@ -96,11 +105,12 @@ def main():
         print("Run 'python compile_per_test.py --n 1' once from d:/bachekor/test_cases/ to build them.")
         sys.exit(1)
 
-    files = select_files(args.n)
+    files = select_files(args.n, args.seed)
     clear_test_cases()
 
     counters: dict[str, int] = defaultdict(int)
     ok = fail = 0
+    selected = []
 
     for java_file in files:
         tag = cwe_tag(java_file)
@@ -109,6 +119,11 @@ def main():
         out_dir  = TEST_CASES_DIR / dir_name
 
         success, stderr = compile_test(java_file, out_dir)
+        selected.append({
+            "source": str(java_file),
+            "case_dir": dir_name,
+            "compiled": success,
+        })
         if success:
             ok += 1
             print(f"  [OK]   {dir_name}  {java_file.name}")
@@ -119,7 +134,13 @@ def main():
             print(f"  [FAIL] {dir_name}  {java_file.name}: {first_err}")
 
     print(f"\nDone — compiled: {ok}, failed: {fail}")
+    args.manifest.parent.mkdir(parents=True, exist_ok=True)
+    args.manifest.write_text(
+        json.dumps({"seed": args.seed, "requested": args.n, "selected": selected}, indent=2),
+        encoding="utf-8",
+    )
     print(f"Output: {TEST_CASES_DIR}")
+    print(f"Manifest: {args.manifest}")
 
 
 if __name__ == "__main__":

@@ -8,10 +8,10 @@ This is an automated security vulnerability remediation pipeline for Java code. 
 1. Compiles random samples from the NIST Juliet Java test suite into `test_cases/`
 2. Scans them with SonarQube (static analysis)
 3. Fetches detected vulnerabilities/hotspots from the SonarQube API and enriches them with rule metadata
-4. Classifies each finding into a security category, loads a matching RAG knowledge document, and sends a structured prompt to a local LLM (DeepSeek via Ollama) to generate a minimal fix
-5. Patches the vulnerable source file in-place (original backed up to `backups/`)
+4. Classifies findings by Sonar rule first, then uses rule-based or LLM-assisted fixes
+5. Applies fixes in `patched/test_cases/`, recompiles, rescans, and evaluates the patch workspace
 
-`evaluate.py` is referenced in `scripts/pipeline.py` but **does not exist yet** — it is the missing Step 3.
+The baseline under `test_cases/` is not modified by `scripts/pipeline.py`.
 
 ## Prerequisites
 
@@ -20,6 +20,7 @@ This is an automated security vulnerability remediation pipeline for Java code. 
 - `javac` (Java 11+) in PATH
 - [Ollama](https://ollama.com/) running locally with `deepseek-coder:6.7b` pulled
 - Juliet test suite source at `d:/bachekor/test_cases/` (compiled support classes at `d:/bachekor/test_cases/bin/support_classes`)
+- `SONAR_TOKEN` set in the environment for scanner and API authentication
 
 ## Commands
 
@@ -31,23 +32,23 @@ docker compose up -d
 
 ### Prepare test cases (run from repo root)
 ```bash
-python setup_bad_cases.py          # 200 random Juliet cases (default)
-python setup_bad_cases.py --n 50   # custom count
+python setup_bad_cases.py                       # reproducible default sample
+python setup_bad_cases.py --n 50 --seed 2026   # custom reproducible sample
 ```
-This clears `test_cases/`, selects N `*_01.java` files from the Juliet suite, compiles each one, and places the result in `test_cases/CWEXX_NNN/{src,classes}/`.
+This clears `test_cases/`, selects N `*_01.java` files from the Juliet suite, compiles each one, and writes `reports/sample_manifest.json` for reproducibility.
 
 ### Run SonarQube scan (run from repo root)
 ```bash
 sonar-scanner
 ```
-Uses `sonar-project.properties`. The scanner token and project key are `sard_cases`.
+Uses `sonar-project.properties`. In PowerShell, set authentication with `$env:SONAR_TOKEN = "..."`.
 
 ### Run the pipeline (run from `scripts/` directory)
 ```bash
 cd scripts
-python pipeline.py        # runs fetch → generate_fixes → evaluate (evaluate missing)
+python pipeline.py        # baseline scan → patch copy → compile → post scan → evaluate
 python fetch_issues.py    # Step 1 only: pull findings → reports/security_issues.json
-python generate_fixes.py  # Step 2 only: apply LLM fixes to test_cases/
+python generate_fixes.py  # Step 2 only: apply fixes to patched/test_cases/
 ```
 
 ## Architecture
@@ -68,8 +69,8 @@ Juliet suite (d:/bachekor/test_cases/)
                               scripts/generate_fixes.py
                                ├─ classify_issue()  → security_taxonomy.py
                                ├─ load_knowledge()  → knowledge/<category>.txt  (RAG)
-                               ├─ extract_code()    → source file ± 8 lines context
-                               └─ POST Ollama API   → patch source, backup to backups/
+                               ├─ rule fix / Ollama → isolated patch proposal
+                               └─ compile + scan    → patched/test_cases/ evaluation
 ```
 
 ### Key files
@@ -80,22 +81,22 @@ Juliet suite (d:/bachekor/test_cases/)
 | `sonar-project.properties` | SonarQube project config (key: `sard_cases`) |
 | `docker-compose.yaml` | SonarQube + PostgreSQL services |
 | `scripts/fetch_issues.py` | Pulls vulnerabilities & hotspots, enriches with rule metadata |
-| `scripts/generate_fixes.py` | LLM-based auto-remediation, writes patched files |
-| `scripts/secuirty_taxomomy.py` | **Filename has a typo** — the module is imported as `security_taxonomy` in `generate_fixes.py`, which will fail unless the file is renamed |
+| `scripts/generate_fixes.py` | Rule-based and LLM-assisted remediation in an isolated patch workspace |
+| `scripts/security_taxonomy.py` | Sonar rule-first security categorization |
 | `knowledge/*.txt` | Per-category RAG context (injection, cryptography, xss, ssrf, path_traversal, authentication, deserialization, generic) |
 | `reports/security_issues.json` | Intermediate output: normalised list of findings with OWASP/CWE metadata |
 | `lib/*.jar` | JARs needed to compile Juliet test cases (servlet-api, commons-lang, commons-codec, javamail) |
 
 ### Security taxonomy & RAG
 
-`scripts/secuirty_taxomomy.py` maps category names → OWASP label + keyword list + knowledge file path. `generate_fixes.py` uses keyword matching on `message + rule` to classify each finding, then loads the matching `knowledge/` file as additional context in the LLM prompt. Unmatched findings fall back to the `"generic"` category.
+`scripts/security_taxonomy.py` maps categories to guidance files. Known Sonar rules override benchmark filenames, so a cookie flag finding in a CWE-113 file is fixed as a cookie flag problem. Unmatched findings fall back to `"generic"`.
 
 ### LLM integration
 
-- **Model**: `deepseek-coder:6.7b` via Ollama REST API (`http://localhost:11434/api/generate`)
+- **Model**: configured in `scripts/config.py` and served via Ollama REST API (`http://localhost:11434/api/generate`)
 - `generate_fixes.py` sends a single-turn, non-streaming request with `stream: false` and a 300 s timeout
-- The response is expected to be raw Java code only (no markdown). It replaces exactly the vulnerable line in the source file; the original line is preserved in `backups/<filename>.bak`
+- LLM output is accepted only as a single Java statement; compilation gates the patched workspace before evaluation
 
 ### SonarQube tokens
 
-`fetch_issues.py` and `sonar-project.properties` each contain hardcoded SonarQube tokens. These are local-only tokens for a private Docker instance and are not secrets in the traditional sense, but should be replaced if the SonarQube instance is recreated.
+The scanner and API scripts read `SONAR_TOKEN` from the environment. Do not commit active tokens.

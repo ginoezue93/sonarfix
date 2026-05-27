@@ -4,3 +4,8 @@ __pycache__/
 venv/
 .ollama/
 .scannerwork/
+
+# generated at runtime — not needed in repo
+patched/
+backups/
+logs/

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"d:\\\\bachekor\\\\pipeline\"; \\(Get-ChildItem test_cases -Recurse -File | Measure-Object\\).Count; \\(Get-ChildItem knowledge -Recurse -File | Measure-Object\\).Count)"
+    ]
+  }
+}

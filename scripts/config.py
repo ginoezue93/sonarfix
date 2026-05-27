@@ -23,7 +23,7 @@ LOGS_DIR       = BASE_DIR / "logs"
 KNOWLEDGE_DIR  = BASE_DIR / "knowledge"
 LIBS_DIR       = BASE_DIR / "lib"
 
-SUPPORT_CLASSES = Path("d:/bachekor/test_cases/bin/support_classes")
+SUPPORT_CLASSES = LIBS_DIR / "support_classes"
 
 LIBS = [
     LIBS_DIR / "servlet-api.jar",
