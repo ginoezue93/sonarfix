@@ -1,6 +1,14 @@
 import re
 
 TAXONOMY = {
+    "cookies": {
+        "owasp": "A05:2021 - Security Misconfiguration",
+        "cwe_ids": [614],
+        "keywords": [
+            "cookie", "secure flag", "httponly", "samesite",
+        ],
+        "knowledge_file": "cookies.txt",
+    },
     "injection": {
         "owasp": "A03:2021 - Injection",
         "cwe_ids": [89, 90, 78, 77, 74, 564, 917],
@@ -75,6 +83,13 @@ TAXONOMY = {
     },
 }
 
+RULE_CATEGORIES = {
+    "java:S2092": "cookies",
+    "java:S2068": "authentication",
+    "java:S6437": "authentication",
+    "java:S5542": "cryptography",
+}
+
 
 def extract_cwe_from_filename(filename: str) -> int | None:
     match = re.search(r"CWE(\d+)", str(filename), re.IGNORECASE)
@@ -97,12 +112,11 @@ def classify_by_keywords(text: str) -> tuple[str, dict]:
 
 
 def classify_issue(issue: dict) -> tuple[str, dict]:
-    # Priority 1: CWE extracted from filename
-    cwe = extract_cwe_from_filename(issue.get("file", ""))
-    if cwe:
-        cat, data = classify_by_cwe(cwe)
-        if cat != "generic":
-            return cat, data
+    # Sonar reports the exact problem to remediate; benchmark filenames may
+    # describe a different vulnerability that happens to exist in the file.
+    rule_category = RULE_CATEGORIES.get(issue.get("rule", ""))
+    if rule_category:
+        return rule_category, TAXONOMY[rule_category]
 
     # Priority 2: CWE from SonarQube metadata
     for raw in issue.get("cwe", []):
@@ -114,6 +128,13 @@ def classify_issue(issue: dict) -> tuple[str, dict]:
         except ValueError:
             pass
 
-    # Priority 3: keyword matching on message + rule
+    # Priority 3: CWE extracted from benchmark filename
+    cwe = extract_cwe_from_filename(issue.get("file", ""))
+    if cwe:
+        cat, data = classify_by_cwe(cwe)
+        if cat != "generic":
+            return cat, data
+
+    # Priority 4: keyword matching on message + rule
     text = issue.get("message", "") + " " + issue.get("rule", "")
     return classify_by_keywords(text)

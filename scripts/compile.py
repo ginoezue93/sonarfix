@@ -38,9 +38,9 @@ def compile_file(java_file: Path, classes_dir: Path) -> tuple[bool, str]:
     return result.returncode == 0, result.stderr.strip()
 
 
-def find_compilable_cases() -> list[tuple[Path, Path]]:
+def find_compilable_cases(test_cases_dir: Path = TEST_CASES_DIR) -> list[tuple[Path, Path]]:
     pairs = []
-    for case_dir in sorted(TEST_CASES_DIR.iterdir()):
+    for case_dir in sorted(test_cases_dir.iterdir()):
         if not (case_dir.is_dir() and case_dir.name.upper().startswith("CWE")):
             continue
         src_dir     = case_dir / "src"
@@ -51,8 +51,8 @@ def find_compilable_cases() -> list[tuple[Path, Path]]:
     return pairs
 
 
-def run(results_file=RESULTS_FILE) -> list[dict]:
-    pairs = find_compilable_cases()
+def run(results_file=RESULTS_FILE, test_cases_dir: Path = TEST_CASES_DIR) -> list[dict]:
+    pairs = find_compilable_cases(test_cases_dir)
     log.info("Compiling %d Java files...", len(pairs))
 
     results = []

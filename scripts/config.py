@@ -1,4 +1,4 @@
-import sys
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
@@ -11,12 +11,13 @@ OLLAMA_URL     = "http://localhost:11434/api/generate"
 MODEL          = "deepseek-coder:6.7b"
 OLLAMA_TIMEOUT = 300
 
-CODE_CONTEXT_LINES = 12
+CODE_CONTEXT_LINES = 8
 
 TEST_CASES_DIR = BASE_DIR / "test_cases"
 REPORTS_DIR    = BASE_DIR / "reports"
 BACKUPS_DIR    = BASE_DIR / "backups"
 PATCHED_DIR    = BASE_DIR / "patched"
+PATCHED_CASES_DIR = PATCHED_DIR / "test_cases"
 EVALUATION_DIR = BASE_DIR / "evaluation"
 LOGS_DIR       = BASE_DIR / "logs"
 KNOWLEDGE_DIR  = BASE_DIR / "knowledge"
@@ -31,6 +32,6 @@ LIBS = [
     LIBS_DIR / "javamail-1.4.4.jar",
 ]
 
-CP_SEP = ";" if sys.platform == "win32" else ":"
+CP_SEP = ";"
 
 SONAR_SCANNER = "sonar-scanner"

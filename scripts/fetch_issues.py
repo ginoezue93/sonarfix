@@ -1,109 +1,188 @@
 import json
 import logging
-import time
 
 import requests
 
 from config import (
-    SONAR_URL, SONAR_TOKEN, PROJECT_KEY,
-    REPORTS_DIR, LOGS_DIR,
+    SONAR_URL,
+    SONAR_TOKEN,
+    PROJECT_KEY,
+    REPORTS_DIR,
 )
 
 REPORTS_DIR.mkdir(exist_ok=True)
-LOGS_DIR.mkdir(exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
 
 log = logging.getLogger(__name__)
 
 OUTPUT_FILE = REPORTS_DIR / "security_issues.json"
 
 
-def get_rule_metadata(rule_key: str) -> dict:
+def get_rule_metadata(rule):
+
     try:
-        r = requests.get(
+
+        response = requests.get(
             f"{SONAR_URL}/api/rules/show",
-            params={"key": rule_key},
+            params={"key": rule},
             auth=(SONAR_TOKEN, ""),
-            timeout=15,
+            timeout=15
         )
-        if r.status_code == 200:
-            return r.json().get("rule", {})
+
+        if response.status_code == 200:
+            return response.json().get("rule", {})
+
     except Exception as e:
-        log.debug("Rule metadata error for %s: %s", rule_key, e)
+
+        log.warning(f"Metadata error for {rule}: {e}")
+
     return {}
 
 
-def fetch_vulnerabilities() -> list[dict]:
-    r = requests.get(
+def fetch_vulnerabilities():
+
+    response = requests.get(
         f"{SONAR_URL}/api/issues/search",
-        params={"componentKeys": PROJECT_KEY, "types": "VULNERABILITY", "ps": 500},
+        params={
+            "componentKeys": PROJECT_KEY,
+            "types": "VULNERABILITY",
+            "resolved": "false",
+            "ps": 500
+        },
         auth=(SONAR_TOKEN, ""),
-        timeout=30,
+        timeout=30
     )
-    r.raise_for_status()
-    return r.json().get("issues", [])
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data.get("issues", [])
 
 
-def fetch_hotspots() -> list[dict]:
-    r = requests.get(
-        f"{SONAR_URL}/api/hotspots/search",
-        params={"projectKey": PROJECT_KEY, "ps": 500},
-        auth=(SONAR_TOKEN, ""),
-        timeout=30,
-    )
-    if r.status_code != 200:
-        log.warning("Hotspot fetch returned %s", r.status_code)
+def fetch_hotspots():
+
+    try:
+
+        response = requests.get(
+            f"{SONAR_URL}/api/hotspots/search",
+            params={
+                "projectKey": PROJECT_KEY,
+                "ps": 500
+            },
+            auth=(SONAR_TOKEN, ""),
+            timeout=30
+        )
+
+        response.raise_for_status()
+
+        data = response.json()
+
+        return data.get("hotspots", [])
+
+    except Exception as e:
+
+        log.warning(f"Hotspot fetch failed: {e}")
+
         return []
-    return r.json().get("hotspots", [])
 
 
-def normalize(raw: dict, issue_type: str, metadata: dict) -> dict:
+def normalize(issue, issue_type, metadata):
+
     standards = metadata.get("securityStandards", {})
+
     return {
-        "type":        issue_type,
-        "rule":        raw.get("rule"),
-        "severity":    raw.get("severity") or raw.get("vulnerabilityProbability"),
-        "message":     raw.get("message"),
-        "file":        raw.get("component"),
-        "line":        raw.get("line"),
-        "owasp":       standards.get("owaspTop10", []),
-        "cwe":         standards.get("cwe", []),
-        "name":        metadata.get("name", ""),
-        "description": metadata.get("htmlDesc", ""),
+
+        "type": issue_type,
+
+        "rule": issue.get("rule"),
+
+        "severity": issue.get("severity")
+        or issue.get("vulnerabilityProbability"),
+
+        "message": issue.get("message"),
+
+        "file": issue.get("component"),
+
+        "line": issue.get("line"),
+
+        "owasp": standards.get("owaspTop10", []),
+
+        "cwe": standards.get("cwe", []),
+
+        "name": metadata.get("name", "")
     }
 
 
-def run(output_file=OUTPUT_FILE) -> list[dict]:
-    log.info("Fetching vulnerabilities from SonarQube...")
-    vulns = fetch_vulnerabilities()
-    log.info("Found %d vulnerabilities", len(vulns))
+def run():
 
-    log.info("Fetching security hotspots...")
+    if not SONAR_TOKEN:
+        raise RuntimeError("SONAR_TOKEN missing")
+
+    log.info("Fetching vulnerabilities...")
+
+    vulnerabilities = fetch_vulnerabilities()
+
+    log.info(f"Found {len(vulnerabilities)} vulnerabilities")
+
+    log.info("Fetching hotspots...")
+
     hotspots = fetch_hotspots()
-    log.info("Found %d hotspots", len(hotspots))
 
-    combined = []
+    log.info(f"Found {len(hotspots)} hotspots")
 
-    for idx, v in enumerate(vulns):
-        rule_key = v.get("rule", "")
-        log.debug("[%d/%d] Enriching rule: %s", idx + 1, len(vulns), rule_key)
-        meta = get_rule_metadata(rule_key)
-        combined.append(normalize(v, "VULNERABILITY", meta))
-        time.sleep(0.05)
+    findings = []
 
-    for idx, h in enumerate(hotspots):
-        rule_key = h.get("rule", "")
-        log.debug("[HS %d/%d] Enriching rule: %s", idx + 1, len(hotspots), rule_key)
-        meta = get_rule_metadata(rule_key)
-        combined.append(normalize(h, "SECURITY_HOTSPOT", meta))
-        time.sleep(0.05)
+    metadata_cache = {}
 
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(combined, f, indent=2, ensure_ascii=False)
+    for issue in vulnerabilities:
 
-    log.info("Saved %d findings → %s", len(combined), output_file)
-    return combined
+        rule = issue.get("rule", "")
+
+        if rule not in metadata_cache:
+            metadata_cache[rule] = get_rule_metadata(rule)
+
+        findings.append(
+            normalize(
+                issue,
+                "VULNERABILITY",
+                metadata_cache[rule]
+            )
+        )
+
+    for hotspot in hotspots:
+
+        rule = hotspot.get("rule", "")
+
+        if rule not in metadata_cache:
+            metadata_cache[rule] = get_rule_metadata(rule)
+
+        findings.append(
+            normalize(
+                hotspot,
+                "SECURITY_HOTSPOT",
+                metadata_cache[rule]
+            )
+        )
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+
+        json.dump(
+            findings,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
+
+    log.info(f"Saved {len(findings)} findings")
+
+    return findings
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
     run()

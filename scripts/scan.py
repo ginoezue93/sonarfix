@@ -4,7 +4,7 @@ import time
 
 import requests
 
-from config import BASE_DIR, SONAR_TOKEN, SONAR_SCANNER
+from config import BASE_DIR, SONAR_TOKEN, SONAR_SCANNER, TEST_CASES_DIR
 
 log = logging.getLogger(__name__)
 
@@ -13,10 +13,22 @@ POLL_INTERVAL    = 5
 POLL_TIMEOUT     = 300
 
 
-def run_sonar_scanner() -> tuple[bool, str]:
-    log.info("Running sonar-scanner from %s", BASE_DIR)
+def run_sonar_scanner(sources_dir=TEST_CASES_DIR) -> tuple[bool, str]:
+    if not SONAR_TOKEN:
+        return False, (
+            "SONAR_TOKEN is not set. In PowerShell, run:\n"
+            '$env:SONAR_TOKEN = "<your-sonarqube-token>"\n'
+            "Then start the pipeline again in the same terminal."
+        )
+    relative_sources = sources_dir.resolve().relative_to(BASE_DIR.resolve()).as_posix()
+    log.info("Running sonar-scanner for %s", relative_sources)
     result = subprocess.run(
-        [SONAR_SCANNER],
+        [
+            SONAR_SCANNER,
+            f"-Dsonar.token={SONAR_TOKEN}",
+            f"-Dsonar.sources={relative_sources}",
+            f"-Dsonar.java.binaries={relative_sources}/**/classes",
+        ],
         cwd=str(BASE_DIR),
         capture_output=True,
         text=True,
@@ -55,8 +67,8 @@ def wait_for_analysis(task_url: str, timeout: int = POLL_TIMEOUT) -> bool:
     return False
 
 
-def run() -> bool:
-    success, output = run_sonar_scanner()
+def run(sources_dir=TEST_CASES_DIR) -> bool:
+    success, output = run_sonar_scanner(sources_dir)
     if not success:
         log.error("sonar-scanner exited with error:\n%s", output[-2000:])
         return False

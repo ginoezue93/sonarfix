@@ -1,164 +1,218 @@
 import json
 import logging
+import re
 from datetime import datetime
-from pathlib import Path
 
 import requests
 
 from config import (
-    SONAR_URL, SONAR_TOKEN, PROJECT_KEY,
-    REPORTS_DIR, EVALUATION_DIR,
+    SONAR_URL,
+    SONAR_TOKEN,
+    PROJECT_KEY,
+    REPORTS_DIR,
+    EVALUATION_DIR,
 )
 
 REPORTS_DIR.mkdir(exist_ok=True)
 EVALUATION_DIR.mkdir(exist_ok=True)
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+
 log = logging.getLogger(__name__)
 
-PRE_FILE      = REPORTS_DIR / "security_issues.json"
-POST_FILE     = REPORTS_DIR / "security_issues_post.json"
-REPORT_FILE   = EVALUATION_DIR / "evaluation_report.json"
-LINE_TOLERANCE = 5
+PRE_FILE = REPORTS_DIR / "security_issues.json"
+POST_FILE = REPORTS_DIR / "security_issues_post.json"
+REPORT_FILE = EVALUATION_DIR / "evaluation_report.json"
 
 
-# ── SonarQube helpers ──────────────────────────────────────────────────────────
+def fetch_current_issues():
 
-def fetch_current_issues() -> list[dict]:
     findings = []
 
-    r = requests.get(
+    response = requests.get(
         f"{SONAR_URL}/api/issues/search",
-        params={"componentKeys": PROJECT_KEY, "types": "VULNERABILITY", "ps": 500},
+        params={
+            "componentKeys": PROJECT_KEY,
+            "types": "VULNERABILITY",
+            "resolved": "false",
+            "ps": 500
+        },
         auth=(SONAR_TOKEN, ""),
-        timeout=30,
+        timeout=30
     )
-    r.raise_for_status()
-    for v in r.json().get("issues", []):
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    for issue in data.get("issues", []):
+
         findings.append({
-            "type":     "VULNERABILITY",
-            "rule":     v.get("rule"),
-            "file":     v.get("component"),
-            "line":     v.get("line"),
-            "message":  v.get("message"),
-            "severity": v.get("severity"),
+            "type": "VULNERABILITY",
+            "rule": issue.get("rule"),
+            "file": issue.get("component"),
+            "line": issue.get("line"),
+            "message": issue.get("message"),
+            "severity": issue.get("severity")
         })
 
-    r2 = requests.get(
+    hotspot_response = requests.get(
         f"{SONAR_URL}/api/hotspots/search",
-        params={"projectKey": PROJECT_KEY, "ps": 500},
+        params={
+            "projectKey": PROJECT_KEY,
+            "ps": 500
+        },
         auth=(SONAR_TOKEN, ""),
-        timeout=30,
+        timeout=30
     )
-    if r2.status_code == 200:
-        for h in r2.json().get("hotspots", []):
+
+    if hotspot_response.status_code == 200:
+
+        hotspot_data = hotspot_response.json()
+
+        for hotspot in hotspot_data.get("hotspots", []):
+
             findings.append({
-                "type":     "SECURITY_HOTSPOT",
-                "rule":     h.get("rule"),
-                "file":     h.get("component"),
-                "line":     h.get("line"),
-                "message":  h.get("message"),
-                "severity": h.get("vulnerabilityProbability"),
+                "type": "SECURITY_HOTSPOT",
+                "rule": hotspot.get("rule"),
+                "file": hotspot.get("component"),
+                "line": hotspot.get("line"),
+                "message": hotspot.get("message"),
+                "severity": hotspot.get("vulnerabilityProbability")
             })
 
     return findings
 
 
-# ── Matching ───────────────────────────────────────────────────────────────────
+def normalize_file(path):
 
-def _key(finding: dict) -> tuple:
-    return (finding.get("file", ""), finding.get("rule", ""))
+    path = path or ""
+
+    path = path.replace("\\", "/")
+
+    path = re.sub(
+        r":(?:patched/)?test_cases/",
+        ":test_cases/",
+        path
+    )
+
+    return path
 
 
-def _line(finding: dict) -> int:
-    return finding.get("line") or 0
+def finding_key(finding):
+
+    return (
+        finding.get("type"),
+        normalize_file(finding.get("file")),
+        finding.get("rule")
+    )
 
 
-def match_findings(pre: list[dict], post: list[dict]) -> dict:
-    post_by_key: dict[tuple, list[dict]] = {}
-    for f in post:
-        post_by_key.setdefault(_key(f), []).append(f)
+def finding_exists(finding, findings):
 
-    fixed    = []
+    target = finding_key(finding)
+
+    for candidate in findings:
+
+        current = finding_key(candidate)
+
+        if current != target:
+            continue
+
+        line_a = finding.get("line")
+        line_b = candidate.get("line")
+
+        if line_a is None or line_b is None:
+            return True
+
+        if abs(line_a - line_b) <= 5:
+            return True
+
+    return False
+
+
+def evaluate(pre_findings, post_findings):
+
+    fixed = []
     remaining = []
-    matched_post_ids = set()
 
-    for pf in pre:
-        key       = _key(pf)
-        candidates = post_by_key.get(key, [])
-        matched = False
-        for i, cf in enumerate(candidates):
-            if i in matched_post_ids:
-                continue
-            if abs(_line(pf) - _line(cf)) <= LINE_TOLERANCE:
-                remaining.append({**pf, "post_line": _line(cf)})
-                matched_post_ids.add(id(cf))
-                matched = True
-                break
-        if not matched:
-            fixed.append(pf)
+    for finding in pre_findings:
 
-    # Post findings with no pre-match are regressions
-    pre_ids = {id(f) for f in pre}
-    new = [
-        f for f in post
-        if id(f) not in {id(r) for r in remaining}
-        and not any(_key(f) == _key(p) and abs(_line(f) - _line(p)) <= LINE_TOLERANCE for p in pre)
-    ]
+        if finding_exists(finding, post_findings):
+            remaining.append(finding)
+        else:
+            fixed.append(finding)
 
-    return {"fixed": fixed, "remaining": remaining, "new": new}
+    new = []
 
+    for finding in post_findings:
 
-# ── Main ───────────────────────────────────────────────────────────────────────
+        if not finding_exists(finding, pre_findings):
+            new.append(finding)
 
-def run(pre_file=PRE_FILE, post_file=POST_FILE, report_file=REPORT_FILE) -> dict:
-    with open(pre_file, "r", encoding="utf-8") as f:
-        pre = json.load(f)
-    log.info("Pre-patch findings: %d", len(pre))
-
-    log.info("Fetching post-patch findings from SonarQube...")
-    post = fetch_current_issues()
-    log.info("Post-patch findings: %d", len(post))
-
-    with open(post_file, "w", encoding="utf-8") as f:
-        json.dump(post, f, indent=2, ensure_ascii=False)
-
-    counts = match_findings(pre, post)
-
-    n_pre     = len(pre)
-    n_fixed   = len(counts["fixed"])
-    n_new     = len(counts["new"])
-    n_remain  = len(counts["remaining"])
-    fix_rate  = round(n_fixed / n_pre, 4) if n_pre else 0.0
-
-    report = {
-        "timestamp":        datetime.now().isoformat(),
-        "pre_total":        n_pre,
-        "post_total":       len(post),
-        "fixed":            n_fixed,
-        "remaining":        n_remain,
-        "new_regressions":  n_new,
-        "fix_rate":         fix_rate,
-        "fix_rate_pct":     f"{fix_rate * 100:.1f}%",
-        "fixed_issues":     counts["fixed"],
-        "remaining_issues": counts["remaining"],
-        "new_issues":       counts["new"],
+    return {
+        "fixed": fixed,
+        "remaining": remaining,
+        "new": new
     }
 
-    with open(report_file, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2, ensure_ascii=False)
 
-    log.info("Evaluation complete:")
-    log.info("  Pre-patch  : %d findings", n_pre)
-    log.info("  Post-patch : %d findings", len(post))
-    log.info("  Fixed      : %d", n_fixed)
-    log.info("  Remaining  : %d", n_remain)
-    log.info("  New        : %d", n_new)
-    log.info("  Fix rate   : %s", report["fix_rate_pct"])
-    log.info("  Report     → %s", report_file)
+def run():
+
+    with open(PRE_FILE, "r", encoding="utf-8") as f:
+        pre = json.load(f)
+
+    log.info(f"Pre findings: {len(pre)}")
+
+    post = fetch_current_issues()
+
+    log.info(f"Post findings: {len(post)}")
+
+    with open(POST_FILE, "w", encoding="utf-8") as f:
+        json.dump(post, f, indent=2)
+
+    result = evaluate(pre, post)
+
+    fixed = len(result["fixed"])
+    remaining = len(result["remaining"])
+    new = len(result["new"])
+
+    total = len(pre)
+
+    fix_rate = round(fixed / total, 4) if total else 0
+
+    report = {
+        "timestamp": datetime.now().isoformat(),
+
+        "pre_total": total,
+        "post_total": len(post),
+
+        "fixed": fixed,
+        "remaining": remaining,
+        "new_regressions": new,
+
+        "fix_rate": fix_rate,
+        "fix_rate_pct": f"{fix_rate * 100:.1f}%",
+
+        "fixed_issues": result["fixed"],
+        "remaining_issues": result["remaining"],
+        "new_issues": result["new"]
+    }
+
+    with open(REPORT_FILE, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+
+    log.info(f"Fixed: {fixed}")
+    log.info(f"Remaining: {remaining}")
+    log.info(f"New: {new}")
+    log.info(f"Fix rate: {report['fix_rate_pct']}")
 
     return report
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
     run()

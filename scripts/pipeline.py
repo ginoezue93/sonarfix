@@ -6,104 +6,169 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from config import LOGS_DIR, REPORTS_DIR, EVALUATION_DIR
+from config import (
+    EVALUATION_DIR,
+    LOGS_DIR,
+    PATCHED_CASES_DIR,
+    REPORTS_DIR,
+    SONAR_TOKEN,
+    TEST_CASES_DIR,
+)
+
+import compile as java_compile
+import evaluate
+import fetch_issues
+import generate_fixes
+import scan
 
 LOGS_DIR.mkdir(exist_ok=True)
 REPORTS_DIR.mkdir(exist_ok=True)
 EVALUATION_DIR.mkdir(exist_ok=True)
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler(
+            LOGS_DIR / f"pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log",
+            encoding="utf-8"
+        )
+    ]
+)
 
-def setup_logging():
-    ts  = datetime.now().strftime("%Y%m%d_%H%M%S")
-    fmt = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s — %(message)s", "%H:%M:%S")
-
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
-
-    sh = logging.StreamHandler(sys.stdout)
-    sh.setLevel(logging.INFO)
-    sh.setFormatter(fmt)
-
-    fh = logging.FileHandler(LOGS_DIR / f"pipeline_{ts}.log", encoding="utf-8")
-    fh.setLevel(logging.DEBUG)
-    fh.setFormatter(fmt)
-
-    root.addHandler(sh)
-    root.addHandler(fh)
+log = logging.getLogger(__name__)
 
 
-def step(name: str):
-    log = logging.getLogger("pipeline")
-    log.info("")
-    log.info("=" * 50)
-    log.info("  %s", name)
-    log.info("=" * 50)
+def run(max_issues=None):
 
+    start = time.time()
 
-def run():
-    setup_logging()
-    log = logging.getLogger("pipeline")
-    log.info("Pipeline started — %s", datetime.now().isoformat())
-    total_start = time.time()
+    log.info("Pipeline started")
 
-    import fetch_issues
-    import generate_fixes
-    import compile
-    import scan
-    import evaluate
+    if not SONAR_TOKEN:
 
-    # ── Step 1: Fetch SonarQube findings ──────────────────────────────────────
-    step("STEP 1 — FETCH SECURITY ISSUES")
-    t = time.time()
-    issues = fetch_issues.run()
-    log.info("Step 1 done in %.1fs — %d findings", time.time() - t, len(issues))
+        log.error("SONAR_TOKEN missing")
 
-    if not issues:
-        log.warning("No findings — nothing to fix. Exiting.")
         return
 
-    # ── Step 2: Generate and apply LLM fixes ──────────────────────────────────
-    step("STEP 2 — GENERATE FIXES")
-    t = time.time()
-    results = generate_fixes.run()
-    patched = sum(1 for r in results if r["status"] == "patched")
-    log.info("Step 2 done in %.1fs — %d/%d patched", time.time() - t, patched, len(results))
+    # -------------------------
+    # 1. BASELINE SCAN
+    # -------------------------
 
-    # ── Step 3: Recompile patched files ───────────────────────────────────────
-    step("STEP 3 — COMPILE")
-    t = time.time()
-    compile_results = compile.run()
-    ok   = sum(1 for r in compile_results if r["status"] == "ok")
-    fail = sum(1 for r in compile_results if r["status"] == "failed")
-    log.info("Step 3 done in %.1fs — %d ok, %d failed", time.time() - t, ok, fail)
+    log.info("Running baseline scan")
 
-    # ── Step 4: Re-scan with SonarQube ────────────────────────────────────────
-    step("STEP 4 — SONARQUBE SCAN")
-    t = time.time()
-    scan_ok = scan.run()
-    if scan_ok:
-        log.info("Step 4 done in %.1fs", time.time() - t)
-    else:
-        log.error("SonarQube scan failed — evaluation may use stale data")
+    baseline_ok = scan.run(TEST_CASES_DIR)
 
-    # ── Step 5: Evaluate results ──────────────────────────────────────────────
-    step("STEP 5 — EVALUATE")
-    t = time.time()
+    if not baseline_ok:
+
+        log.error("Baseline scan failed")
+
+        return
+
+    # -------------------------
+    # 2. FETCH ISSUES
+    # -------------------------
+
+    issues = fetch_issues.run()
+
+    if not issues:
+
+        log.warning("No findings found")
+
+        return
+
+    log.info(f"Found {len(issues)} findings")
+
+    # -------------------------
+    # 3. GENERATE FIXES
+    # -------------------------
+
+    results = generate_fixes.run(
+        max_issues=max_issues
+    )
+
+    patched = sum(
+        r["status"] == "patched"
+        for r in results
+    )
+
+    failed = sum(
+        r["status"] == "failed"
+        for r in results
+    )
+
+    log.info(f"Patched: {patched}")
+    log.info(f"Failed: {failed}")
+
+    # -------------------------
+    # 4. COMPILE VALIDATION
+    # -------------------------
+
+    compile_results = java_compile.run(
+        test_cases_dir=PATCHED_CASES_DIR
+    )
+
+    compile_failed = [
+        result
+        for result in compile_results
+        if result["status"] != "ok"
+    ]
+
+    if compile_failed:
+
+        log.error(
+            f"Compilation failed: {len(compile_failed)} files"
+        )
+
+        return
+
+    log.info("Compilation successful")
+
+    # -------------------------
+    # 5. PATCHED SCAN
+    # -------------------------
+
+    log.info("Running patched scan")
+
+    patched_ok = scan.run(PATCHED_CASES_DIR)
+
+    if not patched_ok:
+
+        log.error("Patched scan failed")
+
+        return
+
+    # -------------------------
+    # 6. EVALUATION
+    # -------------------------
+
     report = evaluate.run()
-    log.info("Step 5 done in %.1fs", time.time() - t)
 
-    # ── Summary ───────────────────────────────────────────────────────────────
-    elapsed = time.time() - total_start
-    log.info("")
-    log.info("=" * 50)
-    log.info("  PIPELINE COMPLETE  (%.0fs total)", elapsed)
-    log.info("  Findings before : %d", report["pre_total"])
-    log.info("  Findings after  : %d", report["post_total"])
-    log.info("  Fixed           : %d", report["fixed"])
-    log.info("  Fix rate        : %s", report["fix_rate_pct"])
-    log.info("  Regressions     : %d", report["new_regressions"])
-    log.info("=" * 50)
+    log.info(f"Fixed: {report['fixed']}")
+    log.info(f"Remaining: {report['remaining']}")
+    log.info(f"New: {report['new_regressions']}")
+    log.info(f"Fix rate: {report['fix_rate_pct']}")
+
+    duration = round(time.time() - start, 1)
+
+    log.info(f"Pipeline finished in {duration}s")
+
+    return report
 
 
 if __name__ == "__main__":
-    run()
+
+    import argparse
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--max",
+        type=int,
+        default=None
+    )
+
+    args = parser.parse_args()
+
+    run(max_issues=args.max)
